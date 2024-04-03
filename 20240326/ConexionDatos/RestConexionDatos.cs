@@ -20,6 +20,7 @@ namespace _20240326.ConexionDatos
         {
             HttpClient = new HttpClient();
             dominio = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5241" : "http://localhost:5241";
+            //dominio = "http://192.168.1.252:5241";//comentar para ejecutar app windows
             url = $"{dominio}/api";
             opcionesJson = new JsonSerializerOptions { 
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase

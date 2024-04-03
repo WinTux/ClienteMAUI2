@@ -1,5 +1,5 @@
 ﻿using _20240326.ConexionDatos;
-using AudioToolbox;
+using System.Diagnostics;
 
 namespace _20240326
 {
@@ -16,7 +16,12 @@ namespace _20240326
             base.OnAppearing();
             coleccionPlatosView.ItemsSource = await restConexionDatos.GetPlatosAsync();
         }
-        
+        async void OnAddPlatoClic(object sender, EventArgs e) {
+            Debug.WriteLine("[EVENTO] Boton AddPlato clickeado.");
+        }
+        async void OnElementoCambiado(object sender, SelectionChangedEventArgs e) {
+            Debug.WriteLine("[EVENTO] Boton ElementoCambiado clickeado.");
+        }
     }
 
 }
