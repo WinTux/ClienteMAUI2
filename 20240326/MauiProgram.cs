@@ -1,4 +1,5 @@
 ﻿using _20240326.ConexionDatos;
+using _20240326.Pages;
 using Microsoft.Extensions.Logging;
 
 namespace _20240326
@@ -17,6 +18,7 @@ namespace _20240326
                 });
             builder.Services.AddSingleton<IRestConexionDatos,RestConexionDatos>();
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<GestionPlatosPage>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
