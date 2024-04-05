@@ -27,6 +27,10 @@ namespace _20240326
         }
         async void OnElementoCambiado(object sender, SelectionChangedEventArgs e) {
             Debug.WriteLine("[EVENTO] Boton ElementoCambiado clickeado.");
+            var param = new Dictionary<string, object> {
+                { nameof(Plato),e.CurrentSelection.FirstOrDefault() as Plato}
+            };
+            await Shell.Current.GoToAsync(nameof(GestionPlatosPage), param);
         }
     }
 

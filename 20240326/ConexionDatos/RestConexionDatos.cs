@@ -12,13 +12,17 @@ namespace _20240326.ConexionDatos
 {
     internal class RestConexionDatos : IRestConexionDatos
     {
-        public readonly HttpClient HttpClient;
+        //public readonly HttpClient HttpClient;
         private readonly string url;
+
+        public HttpClient httpClient { get; }
+
         private readonly string dominio;
         private readonly JsonSerializerOptions opcionesJson;
-        public RestConexionDatos()
+        public RestConexionDatos(HttpClient httpClient)
         {
-            HttpClient = new HttpClient();
+            //HttpClient = new HttpClient();
+            this.httpClient = httpClient;
             dominio = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5241" : "http://localhost:5241";
             //dominio = "http://192.168.1.252:5241";//comentar para ejecutar app windows
             url = $"{dominio}/api";
@@ -37,7 +41,7 @@ namespace _20240326.ConexionDatos
             {
                 string platoSer = JsonSerializer.Serialize<Plato>(plato, opcionesJson);
                 StringContent contenido = new StringContent(platoSer, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await HttpClient.PostAsync($"{url}/plato", contenido);
+                HttpResponseMessage response = await httpClient.PostAsync($"{url}/plato", contenido);
                 if(response.IsSuccessStatusCode)
                     Debug.WriteLine($"[RED] Se ha registrado satisfactoriamente.");
                 else
@@ -59,7 +63,7 @@ namespace _20240326.ConexionDatos
             }
             try
             {
-                HttpResponseMessage response = await HttpClient.DeleteAsync($"{url}/plato/{id}");
+                HttpResponseMessage response = await httpClient.DeleteAsync($"{url}/plato/{id}");
                 if (response.IsSuccessStatusCode)
                     Debug.WriteLine($"[RED] Se ha eliminado satisfactoriamente.");
                 else
@@ -80,7 +84,7 @@ namespace _20240326.ConexionDatos
                 return platos;
             }
             try { 
-                HttpResponseMessage response = await HttpClient.GetAsync($"{url}/plato");
+                HttpResponseMessage response = await httpClient.GetAsync($"{url}/plato");
                 if (response.IsSuccessStatusCode)
                 {
                     var contenido = await response.Content.ReadAsStringAsync();
@@ -106,7 +110,7 @@ namespace _20240326.ConexionDatos
             {
                 string platoSer = JsonSerializer.Serialize<Plato>(plato, opcionesJson);
                 StringContent contenido = new StringContent(platoSer, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await HttpClient.PutAsync($"{url}/plato/{plato.Id}", contenido);
+                HttpResponseMessage response = await httpClient.PutAsync($"{url}/plato/{plato.Id}", contenido);
                 if (response.IsSuccessStatusCode)
                     Debug.WriteLine($"[RED] Se ha modificado satisfactoriamente.");
                 else

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="_20240326.Pages.GestionPlatosPage"
              Title="Gestion de platos">
+    <!--
     <ContentPage.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="0,5,0,5"/>
@@ -10,9 +11,22 @@
     </ContentPage.Resources>
     <VerticalStackLayout Margin="20">
         <Label Text="Acciones a realizar"/>
-        <Entry Text="{Binding Path=plato.Nombre}" Placeholder="Introduzc nombre del plato"/>
+        <Entry Text="{Binding Path=plato.Nombre}" Placeholder="Introduzca nombre del plato"/>
         <Button Text="Guardar" Clicked="OnGuardarClic"/>
         <Button Text="Eliminar" Clicked="OnEliminarClic"/>
         <Button Text="Cancelar" Clicked="OnCancelClic"/>
     </VerticalStackLayout>
+    -->
+    <Grid RowDefinitions="*, Auto" ColumnDefinitions="*,*,*" ColumnSpacing="5">
+        <TableView Intent="Data" Grid.Row="0" Grid.ColumnSpan="3">
+            <TableRoot>
+                <TableSection Title="Tarea a realizar">
+                    <EntryCell Text="{Binding Path=plato.Nombre}" Placeholder="Introduzca nombre del plato" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Button Text="Guardar" Clicked="OnGuardarClic" Grid.Row="1" Grid.Column="0"/>
+        <Button Text="Eliminar" Clicked="OnEliminarClic" Grid.Row="1" Grid.Column="1"/>
+        <Button Text="Cancelar" Clicked="OnCancelClic" Grid.Row="1" Grid.Column="2"/>
+    </Grid>
 </ContentPage>
